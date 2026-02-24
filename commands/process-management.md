@@ -1,0 +1,157 @@
+# Process Management Commands
+
+### Process Listing and Viewing
+- List all running processes: `ps aux`
+- List all processes (standard format): `ps -ef`
+- List processes for current user: `ps -u $USER`
+- List processes in a tree structure: `ps -axjf`
+- List processes by command name: `ps -C command_name`
+- Show process ID (PID) of a command: `pidof command_name`
+- List open files by process: `lsof -p 1234`
+- List all processes (pstree): `pstree`
+- List processes with user and start time: `ps -eo user,pid,ppid,lstart,cmd`
+- List threads of a process: `ps -T -p 1234`
+- Show process threads (H option): `ps -p 1234 H`
+- Show children of a process: `pgrep -P 1234`
+- List processes sorted by CPU: `ps aux --sort=-%cpu`
+- List processes sorted by memory: `ps aux --sort=-%mem`
+- Watch processes in real-time (top): `top`
+- Watch processes in real-time (htop): `htop`
+- List system processes only: `ps -ef | grep "^root"`
+- Show full command line for processes: `ps -fwwp 1234`
+- List zombie processes: `ps aux | awk '{if ($8 == "Z") print $0}'`
+- Show process hierarchy with PIDs: `pstree -p`
+
+### Process Monitoring and Performance
+- Real-time process monitoring: `top`
+- Interactive process viewer (requires htop): `htop`
+- System resource statistics (vmstat): `vmstat 1`
+- Detailed virtual memory stats: `vmstat -s`
+- IO statistics: `iostat -xz 1`
+- Device-specific IO stats: `iostat -p sda 1`
+- CPU statistics (mpstat): `mpstat -P ALL 1`
+- Report process status: `ps -S`
+- Show process start time: `ps -p 1234 -o lstart=`
+- Show process elapsed time: `ps -p 1234 -o etime=`
+- Monitor specific process with top: `top -p 1234`
+- View process environment variables: `cat /proc/1234/environ`
+- View process status from proc: `cat /proc/1234/status`
+- View process limits: `cat /proc/1234/limits`
+- View process memory map: `cat /proc/1234/maps`
+- View process status: `cat /proc/1234/status`
+- View process stack: `sudo cat /proc/1234/stack`
+- View process control groups: `cat /proc/1234/cgroup`
+- Trace system calls (strace): `strace -p 1234`
+- Trace library calls (ltrace): `ltrace -p 1234`
+- Report system resource usage (sar): `sar -u 1 5`
+- Monitor network usage by process: `sudo nethogs`
+
+### Signals and Terminating Processes
+- Send SIGTERM to process: `kill 1234`
+- Forcefully kill process (SIGKILL): `kill -9 1234`
+- Terminate process by name: `killall command_name`
+- Kill processes by pattern: `pkill pattern`
+- Send SIGHUP (reload): `kill -1 1234`
+- List all available signals: `kill -l`
+- Kill all processes for a user: `pkill -u username`
+- Kill processes older than 1 hour: `pkill -o 3600`
+- Kill processes newer than 10 minutes: `pkill -n 600`
+- Kill processes matching a terminal: `pkill -t tty1`
+- Stop a process (SIGSTOP): `kill -STOP 1234`
+- Continue a stopped process (SIGCONT): `kill -CONT 1234`
+- Interactive kill (requires htop): `htop`
+- Terminate all processes of a command: `killall -v command_name`
+- Wait for a process to finish: `wait 1234`
+- Check if process is running: `kill -0 1234`
+- Send SIGQUIT (core dump): `kill -3 1234`
+- Send SIGINT (Ctrl+C equivalent): `kill -2 1234`
+- Xkill (kill GUI app): `xkill`
+
+### Process Priority and Scheduling
+- Start process with specific priority: `nice -n 10 command`
+- Start process with high priority: `nice -n -10 command`
+- Change priority of running process: `renice +5 -p 1234`
+- Change priority for all user processes: `renice +5 -u username`
+- Set IO scheduling class (ionice): `ionice -c 3 command`
+- Run command with idle IO priority: `ionice -c 3 -p 1234`
+- Run command with best-effort IO: `ionice -c 2 -n 4 -p 1234`
+- Show process scheduling policy: `chrt -p 1234`
+- Set real-time priority (chrt): `sudo chrt -f -p 50 1234`
+- View process nice value: `ps -o ni -p 1234`
+- View process priority (PRI): `ps -o pri -p 1234`
+- Batch process execution: `batch`
+- Schedule command (at): `at 10:00 PM`
+- List scheduled jobs (atq): `atq`
+- Remove scheduled job (atrm): `atrm 1`
+- Manage recurring tasks: `crontab -e`
+- List user's crontab: `crontab -l`
+
+### Job Control and Foreground/Background
+- Run command in background: `command &`
+- List background jobs: `jobs`
+- List jobs with PIDs: `jobs -l`
+- Bring job to foreground: `fg %1`
+- Resume job in background: `bg %1`
+- Disown a background job: `disown %1`
+- Keep process running after logout: `nohup command &`
+- Run command in a screen session: `screen`
+- Reattach to screen session: `screen -r`
+- Run command in a tmux session: `tmux`
+- Reattach to tmux session: `tmux attach`
+- Send running process to background (Ctrl+Z): `Ctrl+Z`
+- Redirect background output: `command > output.log 2>&1 &`
+- Watch a background job: `tail -f output.log`
+
+### Resource Limits and Controls
+- Show resource limits (ulimit): `ulimit -a`
+- Set max open files: `ulimit -n 4096`
+- Set max process count: `ulimit -u 1024`
+- Set max core file size: `ulimit -c unlimited`
+- View system-wide process limit: `cat /proc/sys/kernel/pid_max`
+- Show system-wide open file limit: `cat /proc/sys/fs/file-max`
+- Set CPU time limit (timeout): `timeout 10s command`
+- Set memory limit for process (cgroups): `cgexec -g memory:mygroup command`
+- Limit CPU usage (cpulimit): `cpulimit -p 1234 -l 50`
+
+### Advanced Process Management
+- Trace process memory allocations: `valgrind --tool=memcheck command`
+- Profile process performance (perf): `perf record -p 1234`
+- Show perf report: `perf report`
+- Dump process memory: `sudo gcore 1234`
+- Attach debugger to process (gdb): `gdb -p 1234`
+- Run command in a container: `docker run image`
+- Execute command in container: `docker exec -it container_id bash`
+- List container processes: `docker top container_id`
+- Watch system calls in real-time: `sudo sysdig`
+- Filter system calls for process: `sudo sysdig proc.name=command`
+- Run command with different root: `sudo chroot /path/to/new/root command`
+- Set process affinity (taskset): `taskset -cp 0,1 1234`
+- Run command on specific CPU core: `taskset -c 0 command`
+- Show process CPU affinity: `taskset -p 1234`
+- Identify process by file usage: `fuser -v /path/to/file`
+- Kill process by file usage: `fuser -k /path/to/file`
+- List all IPC resources: `ipcs -a`
+- Remove IPC message queue: `ipcrm -q 1234`
+- Remove IPC shared memory: `ipcrm -m 1234`
+- Remove IPC semaphore: `ipcrm -s 1234`
+- Monitor interrupts: `watch -n 1 cat /proc/interrupts`
+- Show process file descriptors: `ls -l /proc/1234/fd`
+- Show process root directory: `ls -l /proc/1234/root`
+- Show process executable path: `ls -l /proc/1234/exe`
+- Show process current working directory: `ls -l /proc/1234/cwd`
+- View process system usage: `time command`
+- Show real, user, and sys time: `time -p command`
+- Execute command as another user: `sudo -u username command`
+- Run command as system service: `systemctl start service_name`
+- Stop system service: `systemctl stop service_name`
+- Restart system service: `systemctl restart service_name`
+- Show service status: `systemctl status service_name`
+- Enable service on boot: `systemctl enable service_name`
+- Disable service on boot: `systemctl disable service_name`
+- Show active systemd jobs: `systemctl list-jobs`
+- Show failed systemd services: `systemctl --failed`
+- View system logs (journalctl): `journalctl -u service_name`
+- Follow system logs in real-time: `journalctl -f`
+- List all systemd services: `systemctl list-units --type=service`
+- Check if service is active: `systemctl is-active service_name`
+- Check if service is enabled: `systemctl is-enabled service_name`
