@@ -7,8 +7,8 @@ This project is focused on building practical knowledge of:
 - Linux command line
 - System administration fundamentals
 - Text processing and log analysis
-- Bash scripting (coming soon)
-- Docker and containerization (coming soon)
+- Bash scripting
+- Docker and containerization
 
 ---
 
@@ -24,8 +24,14 @@ This project is focused on building practical knowledge of:
 │   ├── permissions.md
 │   ├── process-management.md
 │   └── text-processing.md
-├── docker/                 # Docker-based examples (coming soon)
-└── scripts/                # Automation scripts (coming soon)
+├── docker/                 # Docker examples   
+│   ├── backup-tool/
+│   ├── log-analyzer/
+│   └── system-report/
+└── scripts/                # Automation scripts
+    ├── backup.sh
+    ├── log_analyzer.sh
+    └── system_report.sh
 ```
 
 
